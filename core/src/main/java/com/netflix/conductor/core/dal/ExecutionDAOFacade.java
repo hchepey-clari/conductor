@@ -21,6 +21,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import com.netflix.conductor.common.metadata.tasks.TaskType;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -502,6 +503,10 @@ public class ExecutionDAOFacade {
             }
             if (taskModel.getStatus().isTerminal() && taskModel.getEndTime() == 0) {
                 taskModel.setEndTime(System.currentTimeMillis());
+            }
+            if (taskModel.getStatus().isTerminal()) {
+                // In terminal state, monitor completion of tasks
+                Monitors.recordTaskCompleted(taskModel.getTaskDefName());
             }
         }
         externalizeTaskData(taskModel);

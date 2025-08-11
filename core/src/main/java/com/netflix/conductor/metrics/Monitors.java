@@ -368,6 +368,10 @@ public class Monitors {
         counter("event_action_error", "action", action, "entityName", entityName, "event", event);
     }
 
+    public static void recordTaskCompleted(String taskType) {
+        counter("task_completed", "taskType", taskType);
+    }
+
     public static void recordDaoRequests(
             String dao, String action, String taskType, String workflowType) {
         counter(

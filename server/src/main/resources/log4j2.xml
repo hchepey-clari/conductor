@@ -19,13 +19,21 @@
 <Configuration status="WARN">
     <Appenders>
         <Console name="CONSOLE">
-            <PatternLayout pattern="%-4r [%t] %-5p %c %x - %m%n"/>
+            <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
         </Console>
+        <RollingFile name="RollingFile" fileName="/app/logs/conductor_server.log" filePattern="/app/logs/conductor_server-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout pattern="%d %p %c{1.} [%t] %m%n" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
     </Appenders>
 
     <Loggers>
         <Root level="INFO">
             <AppenderRef ref="CONSOLE" />
+            <AppenderRef ref="RollingFile" />
         </Root>
     </Loggers>
 </Configuration>

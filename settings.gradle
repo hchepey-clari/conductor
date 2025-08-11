@@ -75,7 +75,7 @@ include 'amqp'
 include 'nats'
 include 'nats-streaming'
 include 'kafka-event-queue'
-
+include 'server-metrics'
 include 'test-harness'
 
 rootProject.children.each {it.name="conductor-${it.name}"}
