@@ -1,0 +1,11 @@
+{
+  "system_task_completed": {
+    "taskType": "([A-Za-z_]+[A-Za-z]{1})"
+  },
+  "task_execution": {
+    "taskType": "([A-Za-z_]+[A-Za-z]{1})"
+  },
+  "task_concurrent_execution_limited": {
+    "taskType": "([A-Za-z_]+[A-Za-z]{1})"
+  }
+}

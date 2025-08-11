@@ -3,7 +3,11 @@ dependencies {
     implementation project(':conductor-common')
     implementation project(':conductor-core')
 
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude group:'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    // Use Jetty as the embedded container
+    implementation 'org.springframework.boot:spring-boot-starter-jetty'
 
     implementation "com.netflix.runtime:health-api:${revHealth}"
 

@@ -1,0 +1,41 @@
+# Jetty Server Configuration
+server:
+  port: 8080
+  jetty:
+    threads:
+      min: 10
+      max: 200
+      idle-timeout: 60000
+    connection-idle-timeout: 30000
+    accesslog:
+      enabled: true
+      filename: logs/jetty-access.log
+      file-date-format: yyyy-MM-dd
+      retention-period: 31
+      append: true
+      extended-format: true
+      time-zone: GMT
+      log-server: true
+      log-cookies: false
+      log-latency: true
+
+spring:
+  main:
+    web-application-type: servlet
+    banner-mode: console
+  
+  # Explicitly disable Tomcat
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.web.servlet.TomcatServletWebServerFactoryCustomizer
+
+# Logging configuration for Jetty
+logging:
+  level:
+    org.eclipse.jetty: INFO
+    org.springframework.boot.web.embedded.jetty: DEBUG
+
+# Conductor specific configuration
+conductor:
+  server:
+    servlet-container: jetty
