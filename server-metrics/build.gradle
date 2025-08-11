@@ -36,7 +36,7 @@ dependencies {
 
     implementation 'org.coursera:metrics-datadog:1.1.13'
     implementation 'com.netflix.spectator:spectator-reg-metrics3:1.3.10'
-    implementation 'com.codahale.metrics:metrics-core:3.0.1'
+    implementation 'io.dropwizard.metrics:metrics-core:4.2.33'
 
     // Added this so that httpasyncclient 4.1.2 is loaded in the class path otherwise jetty's old version of httpasyncclient will be used and cause RunTimeException with async requests.
     implementation 'org.apache.httpcomponents:httpasyncclient:4.1.2'

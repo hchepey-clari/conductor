@@ -74,11 +74,11 @@ dependencies {
     implementation "redis.clients:jedis:${revJedis}"
     implementation "org.postgresql:postgresql:${revPostgres}"
     implementation "software.amazon.awssdk:sts:${revAwsSdk}"
-    implementation 'com.netflix.spectator:spectator-api:1.5.4'
-    implementation 'com.netflix.spectator:spectator-reg-metrics3:1.5.4'
-    implementation 'com.netflix.spectator:spectator-reg-micrometer:1.5.4'
-    implementation 'io.micrometer:micrometer-registry-datadog:latest.release'
-    implementation 'io.micrometer:micrometer-core:latest.release'
+//    implementation 'com.netflix.spectator:spectator-api:1.5.4'
+//    implementation 'com.netflix.spectator:spectator-reg-metrics3:1.5.4'
+//    implementation 'com.netflix.spectator:spectator-reg-micrometer:1.5.4'
+//    implementation 'io.micrometer:micrometer-registry-datadog:latest.release'
+//    implementation 'io.micrometer:micrometer-core:latest.release'
 
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation ("io.orkes.queues:orkes-conductor-queues:${revOrkesQueues}") {
