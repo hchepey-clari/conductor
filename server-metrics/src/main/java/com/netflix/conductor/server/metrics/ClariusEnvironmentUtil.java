@@ -1,17 +1,28 @@
+/*
+ * Copyright 2025 Conductor Authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
 package com.netflix.conductor.server.metrics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class ClariusEnvironmentUtil
-{
+class ClariusEnvironmentUtil {
     private static final String CLARIUS_ENVIRONMENT = "CLARIUS_ENVIRONMENT";
-    private static final String CONDUCTOR_DATADOG_METRICS_ENABLED_KEY = "CONDUCTOR_DATADOG_METRICS_ENABLED";
+    private static final String CONDUCTOR_DATADOG_METRICS_ENABLED_KEY =
+            "CONDUCTOR_DATADOG_METRICS_ENABLED";
     private static final boolean CONDUCTOR_DATADOG_METRICS_ENABLED_VALUE = true;
 
-    enum ClariusEnvironment
-    {
+    enum ClariusEnvironment {
         DEVELOPMENT,
         STAGING,
         STEELIX,
@@ -19,30 +30,28 @@ class ClariusEnvironmentUtil
         SANDBOX;
 
         @Override
-        public String toString()
-        {
+        public String toString() {
             return super.toString().toLowerCase();
         }
 
-        public boolean in(ClariusEnvironment... environments)
-        {
+        public boolean in(ClariusEnvironment... environments) {
             return Arrays.stream(environments).anyMatch(v -> v == this);
         }
     }
 
-    static ClariusEnvironment getDeploymentEnvironment()
-    {
+    static ClariusEnvironment getDeploymentEnvironment() {
         ClariusEnvironment deployEnv = ClariusEnvironment.DEVELOPMENT;
 
         if (System.getenv().containsKey(CLARIUS_ENVIRONMENT)) {
-            deployEnv = ClariusEnvironment.valueOf(System.getenv().get(CLARIUS_ENVIRONMENT).toUpperCase());
+            deployEnv =
+                    ClariusEnvironment.valueOf(
+                            System.getenv().get(CLARIUS_ENVIRONMENT).toUpperCase());
         }
 
         return deployEnv;
     }
 
-    static int getStatSDPORT()
-    {
+    static int getStatSDPORT() {
         int dogStatSDPORT = 8125;
 
         if (System.getenv().containsKey("STATSD_PORT")) {
@@ -52,8 +61,7 @@ class ClariusEnvironmentUtil
         return dogStatSDPORT;
     }
 
-    static String getStatSDHOST()
-    {
+    static String getStatSDHOST() {
         String host = "localhost";
 
         if (System.getenv().containsKey("STATSD_HOST")) {
@@ -63,8 +71,7 @@ class ClariusEnvironmentUtil
         return host;
     }
 
-    static List<String> getAdditionalTags()
-    {
+    static List<String> getAdditionalTags() {
         List<String> tags = new ArrayList<>();
         tags.add("clari_comp:server");
 
@@ -74,16 +81,20 @@ class ClariusEnvironmentUtil
             tags.add("clari_app:" + System.getenv().get("OTEL_SERVICE_NAME"));
 
             if (System.getenv().containsKey(CLARIUS_ENVIRONMENT)) {
-                tags.add("chef_asg:" + System.getenv().get("OTEL_SERVICE_NAME") + "-server-" + System.getenv().get(CLARIUS_ENVIRONMENT).toLowerCase());
+                tags.add(
+                        "chef_asg:"
+                                + System.getenv().get("OTEL_SERVICE_NAME")
+                                + "-server-"
+                                + System.getenv().get(CLARIUS_ENVIRONMENT).toLowerCase());
             }
         }
 
         return tags;
     }
 
-    static boolean isConductorDatadogMetricsEnabled()
-    {
-        return System.getenv().containsKey(CONDUCTOR_DATADOG_METRICS_ENABLED_KEY) ? Boolean.parseBoolean(System.getenv().get(CONDUCTOR_DATADOG_METRICS_ENABLED_KEY)) : CONDUCTOR_DATADOG_METRICS_ENABLED_VALUE;
+    static boolean isConductorDatadogMetricsEnabled() {
+        return System.getenv().containsKey(CONDUCTOR_DATADOG_METRICS_ENABLED_KEY)
+                ? Boolean.parseBoolean(System.getenv().get(CONDUCTOR_DATADOG_METRICS_ENABLED_KEY))
+                : CONDUCTOR_DATADOG_METRICS_ENABLED_VALUE;
     }
 }
-
