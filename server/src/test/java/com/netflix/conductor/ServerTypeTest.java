@@ -22,28 +22,28 @@ import org.springframework.boot.web.servlet.context.ServletWebServerApplicationC
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Test to verify that Jetty is being used as the embedded server instead of Tomcat.
- */
+/** Test to verify that Jetty is being used as the embedded server instead of Tomcat. */
 @SpringBootTest
 public class ServerTypeTest {
 
-    @Autowired
-    private ServletWebServerApplicationContext applicationContext;
+    @Autowired private ServletWebServerApplicationContext applicationContext;
 
     @Test
     public void testJettyIsUsedInsteadOfTomcat() {
         // Get the embedded web server from the application context
         WebServer webServer = applicationContext.getWebServer();
-        
+
         // Assert that the web server is a JettyWebServer
-        assertTrue(webServer instanceof JettyWebServer, 
-                "Expected embedded server to be JettyWebServer but was: " + webServer.getClass().getName());
-        
+        assertTrue(
+                webServer instanceof JettyWebServer,
+                "Expected embedded server to be JettyWebServer but was: "
+                        + webServer.getClass().getName());
+
         // Assert that the web server is NOT a TomcatWebServer
-        assertFalse(webServer instanceof TomcatWebServer, 
+        assertFalse(
+                webServer instanceof TomcatWebServer,
                 "Embedded server should not be TomcatWebServer");
-        
+
         // Log the server type for clarity
         System.out.println("Embedded server type: " + webServer.getClass().getName());
     }
