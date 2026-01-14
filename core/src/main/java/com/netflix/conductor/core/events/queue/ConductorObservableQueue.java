@@ -55,6 +55,7 @@ public class ConductorObservableQueue implements ObservableQueue {
         this.queueDAO = queueDAO;
         this.pollTimeMS = properties.getEventQueuePollInterval().toMillis();
         this.pollCount = properties.getEventQueuePollCount();
+        //LOGGER.error("INFO Log - PollCount: {}, queueName: {}", pollCount, queueName);
         this.longPollTimeout = (int) properties.getEventQueueLongPollTimeout().toMillis();
         this.scheduler = scheduler;
     }
@@ -105,6 +106,7 @@ public class ConductorObservableQueue implements ObservableQueue {
     private List<Message> receiveMessages() {
         try {
             List<Message> messages = queueDAO.pollMessages(queueName, pollCount, longPollTimeout);
+            //LOGGER.error("INFO pollCount: {}, queueName: {}, messages size: {}", pollCount, queueName, messages.size());
             Monitors.recordEventQueueMessagesProcessed(QUEUE_TYPE, queueName, messages.size());
             Monitors.recordEventQueuePollSize(queueName, messages.size());
             return messages;
