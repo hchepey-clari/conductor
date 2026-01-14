@@ -85,7 +85,6 @@ allprojects {
         implementation('org.apache.logging.log4j:log4j-api')
         implementation('org.apache.logging.log4j:log4j-slf4j-impl')
         implementation('org.apache.logging.log4j:log4j-jul')
-        implementation "io.micrometer:micrometer-registry-otlp:${revMicrometer}"
         implementation('org.apache.logging.log4j:log4j-web')
         implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
         compileOnly 'org.projectlombok:lombok:1.18.34'
