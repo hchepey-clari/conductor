@@ -149,7 +149,8 @@ public class ConductorProperties {
 
     /**
      * The number of threads to be usde in Scheduler used for polling events from multiple event
-     * queues. By default, a thread count equal to the number of CPU cores is chosen.
+     * queues. By default, a thread count equal to the number of CPU cores is chosen. NOTE: This is
+     * only used for legacy RxJava-based event processing.
      */
     private int eventQueueSchedulerPollThreadCount = Runtime.getRuntime().availableProcessors();
 
@@ -158,6 +159,28 @@ public class ConductorProperties {
 
     /** The number of messages to be polled from a default event queue in a single operation. */
     private int eventQueuePollCount = 10;
+
+    /**
+     * Enable Reactor-based event processing instead of RxJava. Reactor provides better scalability
+     * and is thread-count independent.
+     */
+    private boolean reactorEventProcessingEnabled = true;
+
+    /**
+     * The maximum number of concurrent event queue polling operations when using Reactor. This
+     * controls the parallelism of queue polling, not the number of threads. Default is 2x CPU cores
+     * for optimal I/O concurrency.
+     */
+    private int reactorEventQueueMaxConcurrency = Runtime.getRuntime().availableProcessors() * 2;
+
+    /**
+     * The buffer size for Reactor event queue processing. Controls how many messages can be
+     * buffered before backpressure is applied.
+     */
+    private int reactorEventQueueBufferSize = 256;
+
+    /** Enable metrics collection for Reactor-based event processing. */
+    private boolean reactorEventProcessingMetricsEnabled = true;
 
     /** The timeout (in milliseconds) for the poll operation on the default event queue. */
     private Duration eventQueueLongPollTimeout = Duration.ofMillis(1000);

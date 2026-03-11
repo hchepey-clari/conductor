@@ -52,6 +52,7 @@ ext {
     revRarefiedRedis = '0.0.17'
     revRedisson = '3.22.0'
     revRxJava = '1.2.2'
+    revReactor = '3.6.11'  // Project Reactor for scalable event processing
     revSpock = '2.4-M1-groovy-4.0'
     revSpotifyCompletableFutures = '0.3.3'
     revTestContainer = '1.19.3'

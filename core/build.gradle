@@ -37,6 +37,10 @@ dependencies {
 
     implementation "io.reactivex:rxjava:${revRxJava}"
 
+    // Project Reactor for scalable event processing
+    implementation "io.projectreactor:reactor-core:${revReactor}"
+    implementation "io.projectreactor:reactor-core-micrometer:${revReactor}"
+
     implementation "org.apache.bval:bval-jsr:${revBval}"
 
     implementation "com.github.ben-manes.caffeine:caffeine"
